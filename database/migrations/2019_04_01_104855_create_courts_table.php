@@ -15,6 +15,11 @@ class CreateCourtsTable extends Migration
     {
         Schema::create('courts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name', 100);
+            $table->decimal('rate_per_hour', 8, 2);
+            $table->decimal('peak_rate_per_hour', 8, 2);
+            $table->decimal('minimum_rental_per_hour', 8, 1);
+            $table->string('opearting_hour', 100);
             $table->timestamps();
         });
     }
