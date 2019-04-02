@@ -14,5 +14,15 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
+    
     return $request->user();
+});
+
+Route::get('/test', function (Request $request) {
+    return 'api endpoint "test" is working';
+});
+
+Route::group(['middleware' => 'guest:api'], function () {
+    Route::post('oauth/{driver}', 'Auth\OAuthController@redirectToProvider');
+    Route::get('oauth/{driver}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth.callback');
 });
