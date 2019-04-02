@@ -14,12 +14,17 @@ class CreateCourtsTable extends Migration
     public function up()
     {
         Schema::create('courts', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('court_id');
+            $table->unsignedBigInteger('address_id');
+            $table->foreign('address_id', 'courts_address_id')->references('address_id')->on('addresses');
             $table->string('name', 100);
             $table->decimal('rate_per_hour', 8, 2);
             $table->decimal('peak_rate_per_hour', 8, 2);
             $table->decimal('minimum_rental_per_hour', 8, 1);
-            $table->string('opearting_hour', 100);
+            $table->string('operating_hour', 100);
+            $table->string('amenity', 250);
+            $table->string('court_type', 100);
+            $table->string('additional_info', 250);
             $table->timestamps();
         });
     }
