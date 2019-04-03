@@ -13,7 +13,8 @@
         },
         methods: {
             async signIn(provider){
-                let res = await axios.post('/api/oauth/google');
+                let res = await axios.post(' /api/oauth/google');
+                console.log(res.data.url)
             }
         }
     }

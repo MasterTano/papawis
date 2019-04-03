@@ -20,9 +20,9 @@ class OAuthController extends Controller
      */
     public function __construct()
     {
-        config([
-            'services.github.redirect' => route('oauth.callback', 'github'),
-        ]);
+        // config([
+        //     'services.github.redirect' => route('oauth.callback', 'google'),
+        // ]);
     }
 
     /**
@@ -46,8 +46,9 @@ class OAuthController extends Controller
      */
     public function handleProviderCallback($provider)
     {
-        $user = Socialite::driver($provider)->stateless()->user();
-        $user = $this->findOrCreateUser($provider, $user);
+        $socialUser = Socialite::driver($provider)->stateless()->user();
+
+        $user = $this->findOrCreateUser($provider, $socialUser);
 
         $this->guard()->setToken(
             $token = $this->guard()->login($user)
@@ -65,26 +66,26 @@ class OAuthController extends Controller
      * @param  \Laravel\Socialite\Contracts\User $sUser
      * @return \App\User|false
      */
-    protected function findOrCreateUser($provider, $user)
+    protected function findOrCreateUser($provider, $socialUser)
     {
         $oauthProvider = OAuthProvider::where('provider', $provider)
-            ->where('provider_user_id', $user->getId())
+            ->where('provider_user_id', $socialUser->getId())
             ->first();
 
         if ($oauthProvider) {
             $oauthProvider->update([
-                'access_token' => $user->token,
-                'refresh_token' => $user->refreshToken,
+                'access_token' => $socialUser->token,
+                'refresh_token' => $socialUser->refreshToken,
             ]);
 
             return $oauthProvider->user;
         }
 
-        if (User::where('email', $user->getEmail())->exists()) {
+        if (User::where('email', $socialUser->getEmail())->exists()) {
             throw new EmailTakenException;
         }
 
-        return $this->createUser($provider, $user);
+        return $this->createUser($provider, $socialUser);
     }
 
     /**
@@ -92,18 +93,19 @@ class OAuthController extends Controller
      * @param  \Laravel\Socialite\Contracts\User $sUser
      * @return \App\User
      */
-    protected function createUser($provider, $sUser)
+    protected function createUser($provider, $socialUser)
     {
         $user = User::create([
-            'name' => $sUser->getName(),
-            'email' => $sUser->getEmail(),
+            'firstname' => $socialUser->user['given_name'],
+            'lastname' => $socialUser->user['family_name'],
+            'email' => $socialUser->getEmail(),
         ]);
 
         $user->oauthProviders()->create([
             'provider' => $provider,
-            'provider_user_id' => $sUser->getId(),
-            'access_token' => $sUser->token,
-            'refresh_token' => $sUser->refreshToken,
+            'provider_user_id' => $socialUser->getId(),
+            'access_token' => $socialUser->token,
+            'refresh_token' => $socialUser->refreshToken,
         ]);
 
         return $user;
