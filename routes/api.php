@@ -22,6 +22,10 @@ Route::get('/test', [
     'uses'=> 'TestController@test'
 ]);
 
+Route::get('/users', [
+    'uses'=> 'TestController@getUsers'
+]);
+
 Route::group(['middleware' => 'guest:api'], function () {
     Route::post('oauth/{provider}', 'Auth\OAuthController@redirectToProvider');
     Route::get('oauth/{provider}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth_callback');
