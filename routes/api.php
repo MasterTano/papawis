@@ -23,7 +23,7 @@ Route::get('/test', [
 ]);
 
 Route::get('/users', [
-    'uses'=> 'TestController@getUsers'
+    'uses'=> 'UserController@index'
 ]);
 
 Route::group(['middleware' => 'guest:api'], function () {
