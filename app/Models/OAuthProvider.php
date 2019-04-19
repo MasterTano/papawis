@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,11 +14,18 @@ class OAuthProvider extends Model
     protected $table = 'oauth_providers';
 
     /**
+     * Table primary key name
+     *
+     * @var string
+     */
+    protected $primaryKey = 'oauth_provider_id';
+
+    /**
      * The attributes that aren't mass assignable.
      *
      * @var array
      */
-    protected $guarded = ['id'];
+    protected $guarded = ['oauth_provider_id'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -34,6 +41,6 @@ class OAuthProvider extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 }

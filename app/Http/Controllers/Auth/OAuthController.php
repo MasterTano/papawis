@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use App\OAuthProvider;
+use App\Models\User;
+use App\Models\OAuthProvider;
 use App\Http\Controllers\Controller;
 use App\Exceptions\EmailTakenException;
 use Laravel\Socialite\Facades\Socialite;
@@ -54,11 +54,7 @@ class OAuthController extends Controller
             $token = $this->guard()->login($user)
         );
 
-        return view('oauth/callback', [
-            'token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => $this->guard()->getPayload()->get('exp') - time(),
-        ]);
+        return $this->respondWithToken((string) $token);
     }
 
     /**
@@ -109,5 +105,14 @@ class OAuthController extends Controller
         ]);
 
         return $user;
+    }
+
+    protected function respondWithToken(string $token)
+    {
+        return response()->json([
+            'token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => $this->guard()->getPayload()->get('exp') - time(),
+        ]);
     }
 }

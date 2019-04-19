@@ -1,22 +1,27 @@
 <?php
 
-namespace App\Entities;
+namespace App\Models;
 
-use App\OAuthProvider;
-use Laravel\Passport\HasApiTokens;
-use Illuminate\Database\Eloquent\Model;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
-use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class User.
  *
  * @package namespace App\Entities;
  */
-class User extends Model implements Transformable
+class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, Notifiable, TransformableTrait;
+    use Notifiable, TransformableTrait;
+
+    /**
+     * Table primary key name
+     *
+     * @var string
+     */
+    protected $primaryKey = 'user_id';
 
     /**
      * The attributes that are mass assignable.
@@ -57,7 +62,27 @@ class User extends Model implements Transformable
      */
     public function oauthProviders()
     {
-        return $this->hasMany(OAuthProvider::class);
+        return $this->hasMany(OAuthProvider::class, 'user_id', 'user_id');
+    }
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 
 }
