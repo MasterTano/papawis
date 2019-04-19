@@ -1,15 +1,22 @@
 <?php
 
-namespace App;
+namespace App\Entities;
 
+use App\OAuthProvider;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
 
-class User extends Authenticatable
+/**
+ * Class User.
+ *
+ * @package namespace App\Entities;
+ */
+class User extends Model implements Transformable
 {
-    use HasApiTokens, Notifiable;
+    use HasApiTokens, Notifiable, TransformableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -52,4 +59,5 @@ class User extends Authenticatable
     {
         return $this->hasMany(OAuthProvider::class);
     }
+
 }
