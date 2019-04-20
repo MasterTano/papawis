@@ -35,7 +35,18 @@ class OAuthProvider extends Model
     protected $hidden = [
         'access_token', 'refresh_token',
     ];
-
+    
+    /**
+     * The attributes that are mass assignable.
+     */
+    protected $fillable = [
+        'user_id',
+        'provider',
+        'provider_user_id',
+        'access_token',
+        'refresh_token'
+    ];
+    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
