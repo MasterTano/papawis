@@ -32,4 +32,6 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::put('/users/{user_id}', 'UserController@update');
 
+    Route::post('/courts', 'CourtController@store');
+
 });
