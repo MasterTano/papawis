@@ -27,3 +27,9 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::post('oauth/{provider}', 'Auth\OAuthController@redirectToProvider');
     Route::get('oauth/{provider}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth_callback');
 });
+
+Route::group(['middleware' => 'auth:api'], function () {
+
+    Route::put('/users/{user_id}', 'UserController@update');
+
+});
