@@ -31,7 +31,7 @@ class Address extends Model
      */
     public function court()
     {
-        return $this->belongsTo('App\Models\Court');
+        return $this->belongsTo('App\Models\Court', 'address_id', 'court_id');
     }
 
 }
