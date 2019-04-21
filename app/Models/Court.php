@@ -34,7 +34,7 @@ class Court extends Model
      */
     public function address()
     {
-        return $this->hasOne('App\Models\Address');
+        return $this->hasOne('App\Models\Address', 'address_id', 'address_id');
     }
 
 }

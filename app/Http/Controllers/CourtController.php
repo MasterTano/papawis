@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\Court\CreateCourtService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CreateCourtRequest;
+use App\Services\Court\GetCourtService;
 
 class CourtController extends Controller
 {
@@ -16,7 +17,7 @@ class CourtController extends Controller
      */
     public function index()
     {
-        //
+        return 'Court list';
     }
 
     /**
@@ -39,9 +40,9 @@ class CourtController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, GetCourtService $getCourt)
     {
-        //
+        return $getCourt->execute(['id' => $id]);
     }
 
     /**
@@ -53,7 +54,7 @@ class CourtController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return 'updating court';
     }
 
     /**
@@ -64,6 +65,6 @@ class CourtController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return 'deleting court';
     }
 }
