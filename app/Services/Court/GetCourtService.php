@@ -3,10 +3,10 @@
 namespace App\Services\Court;
 
 use App\Models\Court as CourtModel;
-use App\Services\ActionServiceInterface;
+use App\Services\ServiceInterface;
 use App\Exceptions\ModelNotFoundException;
 
-class GetCourtService implements ActionServiceInterface
+class GetCourtService implements ServiceInterface
 {
 
     /**

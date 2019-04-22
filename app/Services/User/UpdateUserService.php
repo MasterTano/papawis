@@ -3,10 +3,10 @@
 namespace App\Services\User;
 
 use App\Models\User as UserModel;
-use App\Services\ActionServiceInterface;
+use App\Services\ServiceInterface;
 use App\Exceptions\ModelNotFoundException;
 
-class UpdateUserService implements ActionServiceInterface
+class UpdateUserService implements ServiceInterface
 {
     /**
      * Create UserModel and OAuthProvider

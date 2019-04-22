@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-interface ActionServiceInterface
+interface ServiceInterface
 {
     /**
      * Execute the service

@@ -2,9 +2,9 @@
 
 namespace App\Services\User;
 
-use App\Services\ActionServiceInterface;
+use App\Services\ServiceInterface;
 
-class GetUserService implements ActionServiceInterface
+class GetUserService implements ServiceInterface
 {
 
     public function execute(array $params)

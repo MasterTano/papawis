@@ -3,10 +3,10 @@
 namespace App\Services\Court;
 
 use App\Models\Court as CourtModel;
-use App\Services\ActionServiceInterface;
+use App\Services\ServiceInterface;
 use App\Services\Address\CreateAddressService;
 
-class CreateCourtService implements ActionServiceInterface
+class CreateCourtService implements ServiceInterface
 {
 
     protected $createAddressService;

@@ -3,9 +3,9 @@
 namespace App\Services\User;
 
 use App\Models\User as UserModel;
-use App\Services\ActionServiceInterface;
+use App\Services\ServiceInterface;
 
-class CreateUserService implements ActionServiceInterface
+class CreateUserService implements ServiceInterface
 {
     /**
      * Create UserModel and OAuthProvider
