@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Address extends Model
 {
+    use SoftDeletes;
+
     /**
      * Table primary key name
      * @var string
@@ -33,5 +36,4 @@ class Address extends Model
     {
         return $this->belongsTo('App\Models\Court', 'address_id', 'court_id');
     }
-
 }
