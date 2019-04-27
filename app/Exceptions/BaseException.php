@@ -20,17 +20,7 @@ class BaseException extends Exception
         parent::__construct($message, $code, $previous);
     }
 
-    // public function render()
-    // {
-    //     return response()->json(
-    //         [
-    //             'error' => $this->message ?: self::DEFAULT_MESSAGE
-    //         ],
-    //         $this->code ?: self::DEFAULT_STATUS_CODE
-    //     );
-    // }
-
-    public function report()
+    public function render()
     {
         return response()->json(
             [
