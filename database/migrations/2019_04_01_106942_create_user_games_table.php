@@ -37,6 +37,7 @@ class CreateUserGamesTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('user_games');
     }
 }

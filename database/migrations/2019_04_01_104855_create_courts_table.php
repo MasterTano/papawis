@@ -42,6 +42,7 @@ class CreateCourtsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('courts');
     }
 }

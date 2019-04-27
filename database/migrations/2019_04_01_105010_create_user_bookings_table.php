@@ -35,6 +35,7 @@ class CreateUserBookingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_bookings');
+        Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists('user_court_bookings');
     }
 }
