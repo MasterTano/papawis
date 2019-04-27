@@ -6,7 +6,7 @@ use App\Models\Court as CourtModel;
 use App\Services\ServiceInterface;
 use App\Exceptions\ModelNotFoundException;
 
-class GetCourtService implements ServiceInterface
+class DeleteCourtService implements ServiceInterface
 {
 
     /**
@@ -23,10 +23,6 @@ class GetCourtService implements ServiceInterface
             throw new ModelNotFoundException();
         }
         
-        if (!$court->address()->exists()) {
-            throw new ModelNotFoundException('Court address not found');
-        }
-
-        return $court->with('address')->first();
+        return $court->delete();
     }
 }

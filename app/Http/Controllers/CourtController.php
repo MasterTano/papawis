@@ -7,6 +7,7 @@ use App\Services\Court\CreateCourtService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CreateCourtRequest;
 use App\Services\Court\GetCourtService;
+use App\Services\Court\DeleteCourtService;
 
 class CourtController extends Controller
 {
@@ -63,8 +64,12 @@ class CourtController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, DeleteCourtService $deleteCourt)
     {
-        return 'deleting court';
+        return DB::transaction(function () use ($id, $deleteCourt) {
+            if ($deleteCourt->execute(['id' => $id])) {
+                return 'Delete success!';
+            }
+        });
     }
 }

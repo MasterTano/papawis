@@ -3,9 +3,9 @@
 namespace App\Services\Address;
 
 use App\Models\Address as AddressModel;
-use App\Services\ActionServiceInterface;
+use App\Services\ServiceInterface;
 
-class CreateAddressService implements ActionServiceInterface
+class CreateAddressService implements ServiceInterface
 {
     /**
      * Create AddressModel and Address

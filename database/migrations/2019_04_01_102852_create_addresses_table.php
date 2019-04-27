@@ -22,6 +22,7 @@ class CreateAddressesTable extends Migration
             $table->integer('zip_code');
             $table->string('country_code', 100);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

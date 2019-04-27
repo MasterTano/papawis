@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services\User;
+namespace App\Services\Auth;
 
 use Laravel\Socialite\Two\User;
-use App\Services\ActionServiceInterface;
+use App\Services\ServiceInterface;
 use App\Models\OAuthProvider;
 
-class GetOAuthProviderService implements ActionServiceInterface
+class GetOAuthProviderService implements ServiceInterface
 {
     public function execute(array $params)
     {

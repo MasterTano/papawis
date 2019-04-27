@@ -7,7 +7,6 @@ use App\Models\User as UserModel;
 use App\Exceptions\EmailTakenException;
 use App\Services\User\CreateUserService;
 use App\Services\SocialLoginServiceInterface;
-use App\Services\User\GetOAuthProviderService;
 
 class SocialLoginService implements SocialLoginServiceInterface
 {
