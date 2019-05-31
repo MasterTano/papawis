@@ -51,8 +51,8 @@ class SocialLoginService implements SocialLoginServiceInterface
         }
         
         return (new CreateUserService())->execute([
-            'firstname' => $socialUser->user['given_name'],
-            'lastname' => $socialUser->user['family_name'],
+            'firstname' => $socialUser->getRaw()['given_name'],
+            'lastname' => $socialUser->getRaw()['family_name'],
             'email' => $socialUser->getEmail(),
             'provider' => $provider,
             'provider_user_id' => $socialUser->getId(),

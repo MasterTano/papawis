@@ -46,8 +46,12 @@ class OAuthController extends Controller
     public function handleProviderCallback($provider)
     {
         return DB::transaction(function() use ($provider) {
-            $socialUser = Socialite::driver($provider)->stateless()->user();
-
+            if (method_exists(Socialite::driver($provider), 'stateless')) {
+                $socialUser = Socialite::driver($provider)->stateless()->user();
+            } else {
+                $socialUser = Socialite::driver($provider)->user();
+            }
+            
             $token = (new SocialLoginService())->execute($provider, $socialUser);
 
             return [

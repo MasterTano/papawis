@@ -15,6 +15,7 @@
             async signIn(provider){
                 let res = await axios.post(' /api/oauth/google');
                 console.log(res.data.url)
+                window.open(res.data.url)
             }
         }
     }

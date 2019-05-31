@@ -10,9 +10,11 @@ class ModelNotFoundException extends BaseException
 
     public function render()
     {
+        $message = $this->getMessage() ?: self::DEFAULT_MESSAGE;
         return response()->json([
             'error' => 'Model not found!',
             'message' => 'We cannot find what you are looking for.'
         ], $this->getCode());
+
     }
 }
