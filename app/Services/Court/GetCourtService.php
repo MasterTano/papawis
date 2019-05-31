@@ -27,6 +27,6 @@ class GetCourtService implements ServiceInterface
             throw new ModelNotFoundException('Court address not found');
         }
 
-        return $court->with('address')->first();
+        return $court->with('address')->get();
     }
 }

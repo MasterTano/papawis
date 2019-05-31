@@ -9,7 +9,7 @@ use App\Http\Requests\CreateCourtRequest;
 use App\Services\Court\GetCourtService;
 use App\Services\Court\DeleteCourtService;
 
-class CourtController extends Controller
+class CourtController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -31,7 +31,7 @@ class CourtController extends Controller
     {
         return DB::transaction(function () use ($request, $action) {
             $action->execute($request->all());
-            return 'Success';
+            return $this->sendSuccessJson();
         });
     }
 
@@ -43,7 +43,7 @@ class CourtController extends Controller
      */
     public function show($id, GetCourtService $getCourt)
     {
-        return $getCourt->execute(['id' => $id]);
+        return $this->sendSuccessJson($getCourt->execute(['id' => $id])->toArray());
     }
 
     /**

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 use App\Services\User\UpdateUserService;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
     /**
      * @var UserRepository
