@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\Court\CreateCourtService;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\CreateCourtRequest;
 use App\Services\Court\GetCourtService;
+use App\Http\Requests\CreateCourtRequest;
+use App\Http\Requests\UpdateCourtRequest;
+use App\Services\Court\CreateCourtService;
 use App\Services\Court\DeleteCourtService;
+use App\Services\Court\UpdateCourtService;
 
 class CourtController extends BaseController
 {
@@ -53,8 +55,14 @@ class CourtController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, UpdateCourtRequest $request, UpdateCourtService $updateCourt)
     {
+        return $updateCourt->execute(
+            array_merge(
+                ['id' => $id],
+                $request->all()
+            )
+        );
         return 'updating court';
     }
 

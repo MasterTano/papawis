@@ -6,27 +6,24 @@ use App\Models\Court as CourtModel;
 use App\Services\ServiceInterface;
 use App\Exceptions\ModelNotFoundException;
 
-class GetCourtService implements ServiceInterface
+class UpdateCourtService implements ServiceInterface
 {
 
     /**
-     * Create CourtModel and Address
+     * Update court
      *
      * @param array $params
      * @return CourtModel
      */
     public function execute(array $params)
     {
-        $court = CourtModel::with('address')->find($params['id']);
+        $court = CourtModel::find($params['id']);
 
         if (!$court) {
             throw new ModelNotFoundException();
         }
         
-        if (!$court->address()->exists()) {
-            throw new ModelNotFoundException('Court address not found');
-        }
-
-        return $court;
+        $res = $court->update($params);
+        dd($res);
     }
 }
