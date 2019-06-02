@@ -21,6 +21,7 @@ class CreateUserBookingsTable extends Migration
             $table->dateTime('starts_at');
             $table->dateTime('ends_at');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('court_id', 'user_court_bookings_court_id')
                 ->references('court_id')->on('courts')->onDelete('cascade');

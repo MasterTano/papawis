@@ -33,4 +33,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::put('/users/{user_id}', 'UserController@update');
 
     Route::resource('courts', 'CourtController');
+
+    Route::resource('bookings', 'BookingController');
 });
