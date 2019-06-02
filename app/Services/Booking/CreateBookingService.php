@@ -16,7 +16,6 @@ class CreateBookingService implements ServiceInterface
     public function execute(array $params)
     {
         $booking = Booking::create($params);
-        dd($booking);
         return $booking;
     }
 }
