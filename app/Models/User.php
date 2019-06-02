@@ -6,6 +6,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Booking;
 
 /**
  * Class User.
@@ -63,6 +64,11 @@ class User extends Authenticatable implements JWTSubject
     public function oauthProviders()
     {
         return $this->hasMany(OAuthProvider::class, 'user_id', 'user_id');
+    }
+
+    public function booking()
+    {
+        return $this->hasMany(Booking::class, 'user_id', 'user_id');
     }
 
     /**

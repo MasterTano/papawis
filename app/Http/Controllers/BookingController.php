@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Booking;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateBookingRequest;
 use App\Services\CreateBookingService;
+use App\Services\GetBookingService;
 
 class BookingController extends BaseController
 {
@@ -37,9 +37,9 @@ class BookingController extends BaseController
      * @param  \App\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function show(Booking $booking)
+    public function show($id, GetBookingService $getBooking)
     {
-        //
+        return $this->sendSuccessJson($getBooking->execute(['id' => $id])->toArray());
     }
 
     /**
