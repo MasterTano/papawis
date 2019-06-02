@@ -2,7 +2,7 @@ vendor/
 node_modules/
 npm-debug.log
 public/css
-public/*.js
+public/js
 
 
 # Laravel 4 specific
