@@ -8,7 +8,6 @@ use App\Exceptions\ModelNotFoundException;
 
 class UpdateCourtService implements ServiceInterface
 {
-
     /**
      * Update court
      *
@@ -23,7 +22,8 @@ class UpdateCourtService implements ServiceInterface
             throw new ModelNotFoundException();
         }
         
-        $res = $court->update($params);
-        dd($res);
+        $court->update($params);
+
+        return $court->address->update($params);
     }
 }

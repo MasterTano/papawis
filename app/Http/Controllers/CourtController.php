@@ -57,13 +57,13 @@ class CourtController extends BaseController
      */
     public function update($id, UpdateCourtRequest $request, UpdateCourtService $updateCourt)
     {
-        return $updateCourt->execute(
-            array_merge(
+        return DB::transaction(function() use ($id, $updateCourt, $request) {
+            $updateCourt->execute(array_merge(
                 ['id' => $id],
                 $request->all()
-            )
-        );
-        return 'updating court';
+            ));
+            return $this->sendSuccessJson();
+        });
     }
 
     /**
@@ -76,7 +76,7 @@ class CourtController extends BaseController
     {
         return DB::transaction(function () use ($id, $deleteCourt) {
             if ($deleteCourt->execute(['id' => $id])) {
-                return 'Delete success!';
+                return $this->sendSuccessJson();
             }
         });
     }
