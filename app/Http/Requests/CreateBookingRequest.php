@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ZeroMinute;
+use App\Rules\HoursDiffWith;
 
 class CreateBookingRequest extends FormRequest
 {
@@ -27,8 +29,9 @@ class CreateBookingRequest extends FormRequest
             'court_id' => 'required|exists:courts',
             'user_id' => 'required|exists:users',
             'inclusion' => 'required|string',
-            'starts_at' => 'required|date',
-            'ends_at' => 'required|date'
+            // 'starts_at' => 'required|date|hours_diff_with:ends_at,2',
+            'starts_at' => ['required', 'date', new HoursDiffWith('ends_at', 2)],
+            'ends_at' => 'required|date',
         ];
     }
 }

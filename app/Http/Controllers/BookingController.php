@@ -49,7 +49,7 @@ class BookingController extends BaseController
      * @param  \App\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Booking $booking)
+    public function update(Request $request)
     {
         //
     }
@@ -60,8 +60,7 @@ class BookingController extends BaseController
      * @param  \App\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Booking $booking)
+    public function destroy(int $id)
     {
-        //
     }
 }
