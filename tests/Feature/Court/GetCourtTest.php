@@ -3,10 +3,6 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Laravel\Socialite\Two\User;
-use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use App\Models\Court;
 use App\Models\Address;
