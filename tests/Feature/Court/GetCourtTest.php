@@ -21,4 +21,11 @@ class GetCourtTest extends TestCase
         $response->assertOk();
         $response->assertJson($court->toArray());
     }
+
+    /** @test */
+    public function it_should_return_404_if_court_does_not_exists()
+    {
+        $response = $this->get($this->courtUrl . 'ID_DOES_NOT_EXISTS');
+        $response->assertNotFound();
+    }
 }

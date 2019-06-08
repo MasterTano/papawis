@@ -7,17 +7,15 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use App\Models\Court;
 use App\Models\Address;
 
-class CreateCourtTest extends TestCase
+class JoinGameTest extends TestCase
 {
     use WithoutMiddleware;
-    use CourtTrait;
 
     /** @test */
-    public function it_should_create_court_successfully()
+    public function it_should_join_game_successfully()
     {
         $address = factory(Address::class)->make();
         $court = factory(Court::class)->make();
-        unset($court['address_id']);
 
         $response = $this->post($this->courtUrl, array_merge($court->toArray(), $address->toArray()));
 
@@ -25,8 +23,8 @@ class CreateCourtTest extends TestCase
         $response->assertExactJson(['message' => 'Success!']);
     }
 
-    /** @test */
-    public function it_should_validate_create_court_parameters()
+    /** @testsss */
+    public function it_should_validate_join_game_parameters()
     {
         $address = factory(Address::class)->make();
         $court = factory(Court::class)->make();
