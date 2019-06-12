@@ -3,43 +3,33 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Models\UserGame;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use App\Models\Court;
-use App\Models\Address;
 
 class JoinGameTest extends TestCase
 {
     use WithoutMiddleware;
+    
+    public  $url = '/api/games/join';
 
     /** @test */
-    public function it_should_join_game_successfully()
+    public function it_should_join_game()
     {
-        $address = factory(Address::class)->make();
-        $court = factory(Court::class)->make();
+        $userGame = factory(UserGame::class)->make();
 
-        $response = $this->post($this->courtUrl, array_merge($court->toArray(), $address->toArray()));
-
+        $response = $this->post($this->url, $userGame->toArray());
         $response->assertOk();
         $response->assertExactJson(['message' => 'Success!']);
     }
 
-    /** @testsss */
+    /** @test */
     public function it_should_validate_join_game_parameters()
     {
-        $address = factory(Address::class)->make();
-        $court = factory(Court::class)->make();
-        unset($court['address_id']);
+        $userGame = factory(UserGame::class)->make();
 
-        $paramKeys = array_keys(array_merge($court->toArray(), $address->toArray()));
-
-        $header = [
-            'Accept' => 'application/json'
-        ];
-        $response = $this->post($this->courtUrl, [], $header);
-        // $response->dump();
-        
+        $response = $this->json('POST', $this->url, []);
         $response->assertStatus(422);
-        $response->assertJsonValidationErrors($paramKeys);
+        $response->assertJsonValidationErrors(array_keys($userGame->toArray()));
         $response->assertJsonFragment(['message' => 'The given data was invalid.']);
     }
 }

@@ -35,4 +35,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('courts', 'CourtController');
 
     Route::resource('bookings', 'BookingController');
+
+    Route::post('games/join', 'GameController@store');
 });

@@ -3,6 +3,7 @@
 use App\Models\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
+use App\Models\OAuthProvider;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +16,12 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(OAuthProvider::class, function (Faker $faker) {
     return [
-        'firstname' => $faker->firstName,
-        'lastname' => $faker->lastName,
-        'birthdate' => $faker->date(),
-        'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
+        'user_id' => factory(User::class)->create()->user_id,
+        'provider' => 'google',
+        'provider_user_id' => $faker->uuid,
+        'access_token' => $faker->uuid,
+        'refresh_token' => $faker->uuid,
     ];
 });

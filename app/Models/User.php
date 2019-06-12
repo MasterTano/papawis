@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Booking;
 
 /**
- * Class User.
+ * Class User
  *
  * @package namespace App\Entities;
  */

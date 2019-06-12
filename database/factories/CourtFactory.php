@@ -1,10 +1,11 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\Models\Address;
 
 $factory->define(App\Models\Court::class, function (Faker $faker) {
     return [
-        'address_id' => $faker->numberBetween(1, 1000000000),
+        'address_id' => factory(Address::class)->create()->address_id,
         'name' => $faker->name(),
         'rate_per_hour' => $faker->numberBetween(1000, 5000),
         'peak_rate_per_hour' => $faker->numberBetween(1000, 5000),
