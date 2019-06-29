@@ -25,7 +25,7 @@ class CreateBookingTest extends TestCase
     public $url = '/api/bookings';
 
     /** @test */
-    public function it_should_create_booking()
+    public function it_can_create_booking()
     {
         $bookingParams = factory(Booking::class)->make()->toArray();
 
@@ -36,7 +36,7 @@ class CreateBookingTest extends TestCase
     }
 
     /** @test */
-    public function it_should_validate_create_booking_parameters()
+    public function it_can_validate_create_booking_parameters()
     {
         $bookingParams = factory(Booking::class)->make()->toArray();
 

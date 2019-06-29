@@ -12,7 +12,8 @@ use Laravel\Socialite\Facades\Socialite;
 class AuthenticationTest extends TestCase
 {
 
-    public function testAuthenticationShouldBeOk()
+    /** @test */
+    public function it_can_authenticate()
     {
         $params = [
             'id' => rand(100000, 10000000000),

@@ -13,7 +13,7 @@ class CreateCourtTest extends TestCase
     use CourtTrait;
 
     /** @test */
-    public function it_should_create_court_successfully()
+    public function it_can_create_court()
     {
         $address = factory(Address::class)->make();
         $court = factory(Court::class)->make();
@@ -26,7 +26,7 @@ class CreateCourtTest extends TestCase
     }
 
     /** @test */
-    public function it_should_validate_create_court_parameters()
+    public function it_can_validate_create_court_parameters()
     {
         $address = factory(Address::class)->make();
         $court = factory(Court::class)->make();

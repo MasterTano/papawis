@@ -13,7 +13,7 @@ class JoinGameTest extends TestCase
     public  $url = '/api/games/join';
 
     /** @test */
-    public function it_should_join_game()
+    public function it_can_join_game()
     {
         $userGame = factory(UserGame::class)->make();
 
@@ -23,7 +23,7 @@ class JoinGameTest extends TestCase
     }
 
     /** @test */
-    public function it_should_validate_join_game_parameters()
+    public function it_can_validate_join_game_parameters()
     {
         $userGame = factory(UserGame::class)->make();
 

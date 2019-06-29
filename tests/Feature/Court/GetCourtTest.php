@@ -13,7 +13,7 @@ class GetCourtTest extends TestCase
     use CourtTrait;
 
     /** @test */
-    public function it_should_get_court()
+    public function it_can_get_court()
     {
         $address = factory(Address::class)->create();
         $court = factory(Court::class)->create(['address_id' => $address->address_id]);
@@ -23,7 +23,7 @@ class GetCourtTest extends TestCase
     }
 
     /** @test */
-    public function it_should_return_404()
+    public function it_can_return_404()
     {
         $response = $this->get($this->courtUrl . 'ID_DOES_NOT_EXISTS');
         $response->assertNotFound();
