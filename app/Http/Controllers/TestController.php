@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Exceptions\ControllerException;
 use App\Repositories\UserRepository;
 
-class TestController extends Controller
+class TestController extends BaseController
 {
     /**
      * @var UserRepository

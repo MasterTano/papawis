@@ -17,9 +17,11 @@ class CreateUserBookingsTable extends Migration
             $table->bigIncrements('booking_id');
             $table->unsignedBigInteger('court_id');
             $table->unsignedBigInteger('user_id');
-            $table->decimal('duration', 8, 1);
             $table->string('inclusion', 200);
+            $table->dateTime('starts_at');
+            $table->dateTime('ends_at');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('court_id', 'user_court_bookings_court_id')
                 ->references('court_id')->on('courts')->onDelete('cascade');
@@ -35,6 +37,7 @@ class CreateUserBookingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_bookings');
+        Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists('user_court_bookings');
     }
 }

@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('{path}', function () {
+Route::get('/{path}', function () {
     return view('index');
-})->where('path', '(.*)');
+})->where('path', '^(?!api).*$');

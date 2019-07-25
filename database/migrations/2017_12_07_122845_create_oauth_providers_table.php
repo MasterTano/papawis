@@ -36,6 +36,7 @@ class CreateOauthProvidersTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('oauth_providers');
     }
 }

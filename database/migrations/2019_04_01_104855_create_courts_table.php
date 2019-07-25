@@ -16,7 +16,6 @@ class CreateCourtsTable extends Migration
         Schema::create('courts', function (Blueprint $table) {
             $table->bigIncrements('court_id');
             $table->unsignedBigInteger('address_id');
-            $table->foreign('address_id', 'courts_address_id')->references('address_id')->on('addresses');
             $table->string('name', 100);
             $table->decimal('rate_per_hour', 8, 2);
             $table->decimal('peak_rate_per_hour', 8, 2);
@@ -26,6 +25,13 @@ class CreateCourtsTable extends Migration
             $table->string('court_type', 100);
             $table->string('additional_info', 250);
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('address_id', 'courts_address_id')
+                ->references('address_id')
+                ->on('addresses')
+                ->onDelete('cascade');
+
         });
     }
 
@@ -36,6 +42,7 @@ class CreateCourtsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('courts');
     }
 }

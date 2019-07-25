@@ -13,14 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    
-    return $request->user();
+Route::middleware('auth:api')->get('/test', function (Request $request) {
+    // return $request->user();
+    return 'test nga!';
 });
 
-Route::get('/test', [
-    'uses'=> 'TestController@test'
-]);
 
 Route::get('/users', [
     'uses'=> 'UserController@index'
@@ -29,4 +26,15 @@ Route::get('/users', [
 Route::group(['middleware' => 'guest:api'], function () {
     Route::post('oauth/{provider}', 'Auth\OAuthController@redirectToProvider');
     Route::get('oauth/{provider}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth_callback');
+});
+
+Route::group(['middleware' => 'auth:api'], function () {
+
+    Route::put('/users/{user_id}', 'UserController@update');
+
+    Route::resource('courts', 'CourtController');
+
+    Route::resource('bookings', 'BookingController');
+
+    Route::post('games/join', 'GameController@store');
 });

@@ -16,6 +16,8 @@ $config = [
   <title>{{ config('app.name') }}</title>
 
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+  <link rel="stylesheet" href="{{ mix('css/vuetify.min.css') }}">
+
 </head>
 <body>
   <div id="app"></div>

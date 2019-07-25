@@ -8,7 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BaseException extends Exception
 {
-    const HTTP_STATUS_CODE = Response::HTTP_BAD_REQUEST;
+    const DEFAULT_STATUS_CODE = Response::HTTP_BAD_REQUEST;
+    const DEFAULT_MESSAGE = 'An error has occured.';
 
     public function __construct(string $message = "", int $code = 0, Throwable $previous = null)
     {
@@ -23,9 +24,9 @@ class BaseException extends Exception
     {
         return response()->json(
             [
-                'error' => 'There is an error in your controller. Fix it biatch!!!'
+                'error' => $this->message ?: self::DEFAULT_MESSAGE
             ],
-            self::HTTP_STATUS_CODE
+            $this->code ?: self::DEFAULT_STATUS_CODE
         );
     }
 }

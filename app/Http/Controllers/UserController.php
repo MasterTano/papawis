@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
+use App\Services\User\UpdateUserService;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
     /**
      * @var UserRepository
@@ -15,9 +16,9 @@ class UserController extends Controller
     /**
      * Class constructor.
      */
-    public function __construct(UserRepository $userRepository)
+    public function __construct( )
     {
-        $this->userRepository = $userRepository;
+        // $this->userRepository = $userRepository;
     }
 
     /**
@@ -27,7 +28,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return $this->userRepository->all();
+        // return $this->userRepository->all();
     }
 
     /**
@@ -59,9 +60,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $userId, UpdateUserService $action)
     {
-        //
+        $action->execute(array_merge(
+            $request->all(),
+            ['user_id' => $userId]
+        ));
+        return 'Success';
     }
 
     /**
