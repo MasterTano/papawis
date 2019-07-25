@@ -12,13 +12,6 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:api')->get('/test', function (Request $request) {
-    // return $request->user();
-    return 'test nga!';
-});
-
-
 Route::get('/users', [
     'uses'=> 'UserController@index'
 ]);
